@@ -1,0 +1,37 @@
+User: {
+    [auth info?]
+}
+
+Sheet: {
+    uid
+    (verbose) name
+    owner: User
+    collaborators: [User]
+    published: bool
+    columns: [Column]
+    rows: [Row]
+}
+
+Column: {
+    uid
+    (verbose) name
+    key (camelized verbose name)
+    type: string choices; e.g. "number", "date", "color"
+    required: bool
+    unique: bool
+    multiple: bool
+    customValidation: {
+        [schemaless min/max for numbers, maxlength for strings. correspond to valid HTML form spec key/values]
+    }
+}
+
+Row: {
+    uid
+    [schemaless key/value pairs with invariant of matching column definitions]
+}
+
+UserLocation: {
+    user: User
+    row: Row
+    column: Column
+}

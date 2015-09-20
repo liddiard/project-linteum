@@ -1,0 +1,13 @@
+<a href="/logout">logout</a>
+<strong>id</strong>: {{ user.google.id }}<br>
+<strong>token</strong>: {{ user.google.token }}<br>
+<strong>email</strong>: {{ user.google.email }}<br>
+<strong>name</strong>: {{ user.google.name }}
+
+<form action="/sheet/create" method="post">
+  <button type="submit" href="/sheet/create">Create Sheet</button>
+</form>
+
+<ul>
+  {{#each sheets}}<li>{{ _id }}</li>{{/each}}
+</ul>
