@@ -25,6 +25,7 @@ require('./config/passport')(passport); // pass passport for configuration
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
+app.use(expres.sstatic('static')); // static files
 
 // set up handlebars for templating
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
