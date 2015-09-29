@@ -4,13 +4,13 @@ var bcrypt   = require('bcrypt-nodejs');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-    google           : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String,
-        image        : String
-    }
+  google         : {
+    id           : String,
+    token        : String,
+    email        : String,
+    name         : String,
+    image        : String
+  }
 });
 
 // create the model for users and expose it to our app
