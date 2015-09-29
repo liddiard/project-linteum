@@ -34,10 +34,10 @@ var App = React.createClass({
   render: function() {
     return (
       <div id="app">
-        <Header />
-        <SheetList />
-        <Table />
-        <ColumnConfig />
+        <header>
+          Header stuff goes here
+        </header>
+        {this.props.children}
       </div>
     );
   }
