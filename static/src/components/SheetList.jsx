@@ -1,21 +1,51 @@
+import request from 'superagent'
 import React from 'react'
-import Link from 'react-router'
+import {Link, History} from 'react-router'
 
 
 const SheetList = React.createClass({
 
-  propTypes: {
-    sheets: React.PropTypes.array.isRequired
+  mixins: [History],
+
+  getInitialState() {
+    return {
+      sheets: []
+    }
   },
 
-  render(){
-    let sheets = this.props.sheets.map(sheet => {
-      <Link to="/edit/{sheet._id}" class="sheet">
-        <h2>{sheet.name}</h2>
-      </Link>
+  componentDidMount() {
+    // get a list of the user's sheets
+    request
+    .get('/sheets')
+    .end(function(err, res){
+      this.setState({sheets: res.body});
+    }.bind(this));
+  },
+
+  createSheet() {
+    request
+    .post('/sheets')
+    .end(function(err, res){
+      let sheets = this.state.sheets;
+      const newSheet = res.body;
+      sheets.push(newSheet);
+      this.setState({sheets: sheets}, () => {
+        this.history.pushState(null, '/edit/'+newSheet._id);
+      });
+    }.bind(this));
+  },
+
+  render() {
+    let sheets = this.state.sheets.map(sheet => {
+      return (
+        <Link to={'/edit/'+sheet._id} className="sheet" key={sheet._id}>
+          <h2>{sheet._id}</h2>
+        </Link>
+      );
     });
     return (
-      <section class="sheets">
+      <section className="sheets">
+        <button onClick={this.createSheet}>Create sheet</button>
         {sheets}
       </section>
     );

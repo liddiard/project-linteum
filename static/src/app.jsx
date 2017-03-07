@@ -1,34 +1,24 @@
 var request = require('superagent');
-var socket = require('socket.io-client');
 import React from 'react'
 import { Router, Route, Link } from 'react-router'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
 
 require('./app.scss');
 
-var Header = require('./components/Header.jsx');
-var Table = require('./components/Table.jsx');
-var ColumnConfig = require('./components/ColumnConfig.jsx');
+var SheetList = require('./components/SheetList.jsx');
+var Editor = require('./components/Editor.jsx');
 
+let history = createBrowserHistory();
 
 var App = React.createClass({
 
   componentDidMount: function() {
-    // get information about the user
+    // get information about this user
     request
     .get('/user')
     .end(function(err, res){
       this.setState({user: res.body});
     }.bind(this));
-
-    // get a list of the user's sheets
-    request
-    .get('/sheets')
-    .end(function(err, res){
-      this.setState({sheets: res.body});
-    }.bind(this));
-
-    // bind sockets
-    // socket.on('column create');
   },
 
   render: function() {
@@ -37,6 +27,7 @@ var App = React.createClass({
         <header>
           Header stuff goes here
         </header>
+        {/* shareConfig goes here */}
         {this.props.children}
       </div>
     );
@@ -44,13 +35,11 @@ var App = React.createClass({
 
 });
 
-
 React.render((
-  <Router>
+  <Router history={history}>
     <Route path="/" component={App}>
-      <Route path="/edit" component={SheetList}>
-        <Route path=":sheetId" component={Editor} />
-      </Route>
+      <Route path="/edit" component={SheetList} />
+      <Route path="/edit/:sheetId" component={Table} />
     </Route>
   </Router>
 ), document.body);

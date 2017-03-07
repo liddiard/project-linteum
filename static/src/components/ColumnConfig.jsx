@@ -1,15 +1,22 @@
-var React = require('react');
+import React from 'react'
 
 
-var ColumnConfig = React.createClass({
+const ColumnConfig = React.createClass({
 
   propTypes: {
     column: React.PropTypes.object.isRequired
   },
 
-  render: function(){
+  handleColumnCreate() {
+    this.props.columnCreate(0, {name: 'col', key: 'col', type: 'text', required: false, unique: false, multiple: false, customValidation: {}});
+  },
+
+  render() {
     return (
-      <h2>ColumnConfig</h2>
+      <aside>
+        <h2>ColumnConfig</h2>
+        <button onClick={this.handleColumnCreate}>Add column</button>
+      </aside>
     );
   }
 

@@ -5,15 +5,22 @@ var Row = React.createClass({
 
   propTypes: {
     columns: React.PropTypes.array.isRequired,
-    cells: React.PropTypes.array.isRequired
+    row: React.PropTypes.object.isRequired,
+    index: React.PropTypes.number.isRequired
   },
 
-  render: function(){
+  handleCellChange() {
+    let row = this.props.row;
+    row[event.target.name] = event.target.value;
+    this.props.rowUpdate(this.props.index, row);
+  },
+
+  render() {
     // create an array of cells ordered according to the column order
     var cells = this.props.columns.map(function(column){
       return (
-        <Cell type={column.type} constraints={column.constraints}
-              value={this.props.cells[column.key]} />
+        <Cell column={column} row={row}
+              handleCellChange={this.handleCellChange} />
       );
     }.bind(this));
     return (
@@ -21,7 +28,7 @@ var Row = React.createClass({
         {cells}
       </tr>
     );
-  }
+  },
 
 });
 

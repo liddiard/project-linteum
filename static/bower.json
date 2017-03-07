@@ -1,0 +1,26 @@
+{
+  "name": "project-linteum",
+  "version": "0.0.0",
+  "homepage": "https://github.com/liddiard/project-linteum",
+  "authors": [
+    "omniaura <omniaura5@gmail.com>"
+  ],
+  "description": "",
+  "main": "src/index.html",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "license": "(c) Harrison Liddiard All rights reserved",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handsontable": "~0.19.0"
+  }
+}

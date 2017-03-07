@@ -131,7 +131,7 @@ module.exports = function(app, passport, io) {
   // =====================================
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the loginRequired function)
-  app.get('/edit', loginRequired, function(req, res) {
+  app.get(['/edit', '/edit*'], loginRequired, function(req, res) {
     console.log(req.user);
     res.render('editor.handlebars');
   });

@@ -7,7 +7,7 @@ var Table = React.createClass({
 
   propTypes: {
     columns: React.PropTypes.array.isRequired,
-    rows: React.PropTypes.array.isRequired
+    rows: React.PropTypes.array.isRequired,
   },
 
   render: function(){
@@ -16,9 +16,11 @@ var Table = React.createClass({
         <th>{column.name}</th>
       );
     });
-    var rows = this.props.rows.map(function(row){
+    var rows = this.props.rows.map((row, index) => {
       return (
-        <Row columns={this.props.columns} cells={row} />
+        <Row columns={this.props.columns} row={row} index={index}
+             rowCreate={this.props.rowCreate} rowUpdate={this.props.rowUpdate}
+             rowDelete={this.props.rowDelete} />
       );
     }.bind(this));
     return (
